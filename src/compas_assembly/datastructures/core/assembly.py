@@ -129,85 +129,85 @@ class Assembly(Network):
         self.blocks[key] = block
         return key
 
-    # def add_blocks_from_polysurfaces(self, guids):
-    #     """Add multiple blocks from their representation as Rhino poly surfaces.
+    def add_blocks_from_polysurfaces(self, guids):
+        """Add multiple blocks from their representation as Rhino poly surfaces.
 
-    #     Parameters
-    #     ----------
-    #     guids : list of str
-    #         A list of GUIDs identifying the poly-surfaces representing the blocks of the assembly.
+        Parameters
+        ----------
+        guids : list of str
+            A list of GUIDs identifying the poly-surfaces representing the blocks of the assembly.
 
-    #     Returns
-    #     -------
-    #     list
-    #         The keys of the added blocks.
+        Returns
+        -------
+        list
+            The keys of the added blocks.
 
-    #     Warning
-    #     -------
-    #     This method only works in Rhino.
+        Warning
+        -------
+        This method only works in Rhino.
 
-    #     Examples
-    #     --------
-    #     >>>
-    #     """
-    #     from compas_assembly.datastructures import Block
-    #     onames = compas_rhino.get_object_names(guids)
-    #     keys = []
-    #     for i, (guid, oname) in enumerate(zip(guids, onames)):
-    #         try:
-    #             attr = ast.literal_eval(oname)
-    #         except (TypeError, ValueError):
-    #             attr = {}
-    #         name = attr.get('name', 'B{0}'.format(i))
-    #         block = Block.from_polysurface(guid)
-    #         block.attributes['name'] = name
-    #         key = self.add_block(block, attr_dict=attr)
-    #         keys.append(key)
-    #     return keys
+        Examples
+        --------
+        >>>
+        """
+        from compas_assembly.datastructures import Block
+        onames = compas_rhino.get_object_names(guids)
+        keys = []
+        for i, (guid, oname) in enumerate(zip(guids, onames)):
+            try:
+                attr = ast.literal_eval(oname)
+            except (TypeError, ValueError):
+                attr = {}
+            name = attr.get('name', 'B{0}'.format(i))
+            block = Block.from_polysurface(guid)
+            block.attributes['name'] = name
+            key = self.add_block(block, attr_dict=attr)
+            keys.append(key)
+        return keys
 
-    # def add_blocks_from_rhinomeshes(self, guids):
-    #     """Add multiple blocks from their representation as as Rhino meshes.
+    def add_blocks_from_rhinomeshes(self, guids):
+        """Add multiple blocks from their representation as as Rhino meshes.
 
-    #     Parameters
-    #     ----------
-    #     guids : list of str
-    #         A list of GUIDs identifying the meshes representing the blocks of the assembly.
+        Parameters
+        ----------
+        guids : list of str
+            A list of GUIDs identifying the meshes representing the blocks of the assembly.
 
-    #     Returns
-    #     -------
-    #     list
-    #         The keys of the added blocks.
+        Returns
+        -------
+        list
+            The keys of the added blocks.
 
-    #     Warning
-    #     -------
-    #     This method only works in Rhino.
+        Warning
+        -------
+        This method only works in Rhino.
 
-    #     Examples
-    #     --------
-    #     .. code-block:: python
+        Examples
+        --------
+        .. code-block:: python
 
-    #         assembly = Assembly()
+            assembly = Assembly()
 
-    #         guids = compas_rhino.select_meshes()
+            guids = compas_rhino.select_meshes()
 
-    #         assembly.add_blocks_from_rhinomeshes(guids)
+            assembly.add_blocks_from_rhinomeshes(guids)
 
-    #     """
-    #     from compas_assembly.datastructures import Block
+        """
+        from compas_assembly.datastructures import Block
 
-    #     onames = compas_rhino.get_object_names(guids)
-    #     keys = []
-    #     for i, (guid, oname) in enumerate(zip(guids, onames)):
-    #         try:
-    #             attr = ast.literal_eval(oname)
-    #         except (TypeError, ValueError):
-    #             attr = {}
-    #         name = attr.get('name', 'B{0}'.format(i))
-    #         block = Block.from_rhinomesh(guid)
-    #         block.attributes['name'] = name
-    #         key = self.add_block(block, attr_dict=attr)
-    #         keys.append(key)
-    #     return keys
+        onames = compas_rhino.get_object_names(guids)
+        keys = []
+        for i, (guid, oname) in enumerate(zip(guids, onames)):
+            try:
+                attr = ast.literal_eval(oname)
+            except (TypeError, ValueError):
+                attr = {}
+            name = attr.get('name', 'B{0}'.format(i))
+            block = Block.from_rhinomesh(guid)
+            block.attributes['name'] = name
+            key = self.add_block(block, attr_dict=attr)
+            keys.append(key)
+        return keys
 
     def number_of_interface_nodes(self):
         """Compute the total number of interface nodes.
